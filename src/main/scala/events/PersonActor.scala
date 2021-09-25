@@ -19,6 +19,4 @@ object PersonActor {
       }
     }
 
-  final case class OrderCreated(name: String)
-
 }

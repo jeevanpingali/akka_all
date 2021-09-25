@@ -19,6 +19,4 @@ object OrderPlacedActor {
       }
     }
 
-  final case class OrderCreated(name: String)
-
 }
