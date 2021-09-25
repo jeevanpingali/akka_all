@@ -3,8 +3,10 @@ package set1
 
 import akka.actor.typed.Behavior
 import akka.actor.typed.scaladsl.{Behaviors, LoggerOps}
+import akka.event.slf4j.Logger
 
 object HelloWorldBot {
+  val logger = Logger("HelloWorldBot")
 
   def apply(max: Int): Behavior[HelloWorld.Greeted] = {
     bot(0, max)

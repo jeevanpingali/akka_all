@@ -4,10 +4,9 @@ package set1
 import akka.actor.typed.Behavior
 import akka.actor.typed.scaladsl.Behaviors
 import akka.event.slf4j.Logger
-import org.slf4j.Logger
 
 object HelloWorldMain {
-  val logger: Logger = Logger("Main")
+  val logger= Logger("HelloWorldMain")
 
   def apply(): Behavior[SayHello] =
     Behaviors.setup { context =>
