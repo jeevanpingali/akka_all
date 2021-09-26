@@ -1,9 +1,8 @@
-package pingali.jeevan.learning.akka
-package events
+package pingali.jeevan.learning.akka.events
 
 import akka.actor.typed.ActorSystem
 import akka.event.slf4j.Logger
-import tutorial.addressbook.{OrderPlaced, Person}
+import all_events.AllEvents._
 
 object Main extends App {
   val logger = Logger("Events Main")
@@ -12,16 +11,27 @@ object Main extends App {
   val system: ActorSystem[Person] = ActorSystem(PersonActor(), "personActor")
   logger.info(s"Actor system created $system, about to call SayHello")
 
-  system ! Person("World", 1)
+  val person1 = Person.newBuilder()
+  person1.setName("World")
+  person1.setId(1)
+
+  system ! person1.build()
   logger.info("First hello")
-  system ! Person("Hello", 2)
+
+  val person2 = Person.newBuilder()
+  person2.setName("Hello")
+  person2.setId(2)
+  system ! person2.build()
   logger.info("Second hello")
 
-  val orderPlaced = new OrderPlaced(1, "Hi", false)
+  val orderPlaced = OrderPlaced.newBuilder//(1, "Hi", false)
+  orderPlaced.setId(1)
+  orderPlaced.setName("Hi")
+  orderPlaced.setFulfilled(false)
   val system2: ActorSystem[OrderPlaced] = ActorSystem(OrderPlacedActor(), "orderPlacedActor")
-  system2 ! orderPlaced
+  system2 ! orderPlaced.build()
 
-  Thread.sleep(10 * 1000)
+  Thread.sleep(5 * 1000)
 
   system.terminate()
   system2.terminate()

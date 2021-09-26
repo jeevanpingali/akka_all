@@ -1,10 +1,9 @@
-package pingali.jeevan.learning.akka
-package events
+package pingali.jeevan.learning.akka.events
 
 import akka.actor.typed.Behavior
 import akka.actor.typed.scaladsl.Behaviors
 import akka.event.slf4j.Logger
-import tutorial.addressbook.{OrderPlaced, Person}
+import all_events.AllEvents.OrderPlaced
 
 object OrderPlacedActor {
   val logger= Logger("Order Placed Actor")
@@ -14,7 +13,7 @@ object OrderPlacedActor {
       logger.info(s"Context: $context")
 
       Behaviors.receiveMessage { message =>
-        logger.info(s"Received message: ${message.name}")
+        logger.info(s"Received message: ${message.getName}")
         Behaviors.same
       }
     }

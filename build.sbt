@@ -4,22 +4,23 @@ version := "0.1"
 
 scalaVersion := "2.13.6"
 
-idePackagePrefix := Some("pingali.jeevan.learning.akka")
+//idePackagePrefix := Some("pingali.jeevan.learning.akka")
+
+/*
+lazy val buildSettings = Seq(
+  organization        := "pingali.jeevan.learning.akka",
+  version             := "1.0-SNAPSHOT"
+)
+*/
 
 val AkkaVersion = "2.6.16"
+resolvers += Resolver.mavenLocal
+
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
   "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion % Test
 )
 
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.6"
 
-Compile / PB.targets := Seq(
-  scalapb.gen() -> (Compile / sourceManaged).value / "scalapb"
-)
-
-// (optional) If you need scalapb/scalapb.proto or anything from
-// google/protobuf/*.proto
-libraryDependencies ++= Seq(
-  "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf"
-)
+libraryDependencies += "pingali.jeevan.learning.protocol_buffers" % "all_events" % "1.0-SNAPSHOT"
